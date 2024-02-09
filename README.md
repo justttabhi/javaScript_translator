@@ -25,7 +25,7 @@ This project aims to demonstrate the utilization of the Google API for translati
 This project relies on the Google API for translation functionality. Special thanks to the Google Developers team for providing access to this powerful tool and enabling seamless translation experiences for users worldwide.
 
 ### Author
-[Your Name] - [Your Contact Information]
+[Abhishek Desai](https://www.linkedin.com/in/justttabhi/)
 
 ### License
 This project is licensed under the [License Name] License - see the [LICENSE.md](LICENSE.md) file for details.
