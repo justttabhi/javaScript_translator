@@ -1,4 +1,3 @@
-# javaScript_translator
 
 ## Project: Webpage Translation using Google API
 
