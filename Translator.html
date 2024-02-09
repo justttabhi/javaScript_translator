@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Translate English to Hindi</title>
+</head>
+
+<body>
+
+
+
+
+
+
+    <!-- This code is to convert translate full web page starts -->
+    <div>If dropdown not load need to clear cookies</div>
+    <div id="google_translate_element"></div><br>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+        //Dropdown which change language of web page
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+        }
+    </script>
+    <!-- This code is to convert translate full web page ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Translate inside id='translate_button' onclick button starts -->
+    <div id="translate_button">Hello friends</div>
+    <button onclick="translateToHindiLang()">Translate</button> <br>
+    <script>
+        function translateToHindi(word, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=hi&dt=t&q=" + encodeURIComponent(word), true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    var translatedWord = response[0][0][0];
+                    callback(translatedWord);
+                }
+            };
+            xhr.send();
+        }
+
+
+        function translateToHindiLang() {
+            translateMyWord = document.getElementById('translate_button').innerHTML;
+            // Example usage: 
+            var translatedWord = translateToHindi(translateMyWord, function (translatedWord) {
+                console.log("English: hello, Hindi: " + translatedWord);
+                document.getElementById('translate_button').innerHTML = ("English: hello friends, Hindi: " + translatedWord)
+                return translatedWord;
+            });
+        }
+
+    </script>
+    <!-- Translate on click ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Translate inside id='translate_input' while validation starts -->
+    <br>
+    <div id="translate_input">My Google Translate</div>
+    <input type="text" id="rgtword" onchange="myFunction()" />
+    <br>
+    <script>
+        function translateToHindi2(word) {
+            return new Promise(function (resolve, reject) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=hi&dt=t&q=" + encodeURIComponent(word), true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        var translatedWord = response[0][0][0];
+                        resolve(translatedWord);
+                    }
+                };
+                xhr.onerror = function () {
+                    reject(new Error("Network error occurred"));
+                };
+                xhr.send();
+            });
+        }
+
+
+        function myFunction() {
+
+            // x.value = x.value.toUpperCase();
+            let word = document.getElementById('rgtword');
+
+            translateToHindi2(word.value).then((data) => document.getElementById('translate_input').innerHTML = data).catch((error) => {
+                console.error("Translation failed:", error);
+            });
+        }
+    </script>
+    <!-- Translate inside id='translate_button' while validation ends -->
+
+
+
+
+
+
+
+    <!-- Translate inside id='translate_button' onclick button starts -->
+    <br>
+    <div id="translate_drop"> Hello friends <br> marathi:नमस्कार मित्रांनो</div>
+
+    <label for="cars">Choose from lang:</label>
+    <select name="cars" id="from">
+        <option value="en" selected>English</option>
+        <option value="hi">Hindi</option>
+        <option value="mr">Marathi</option>
+    </select>
+
+    <label for="cars2">Choose to lang:</label>
+    <select name="cars2" id="to">
+        <option value="en">English</option>
+        <option value="hi">Hindi</option>
+        <option value="mr">Marathi</option>
+    </select>
+    <input type="submit" onclick="translateLang()">
+    <script>
+        function translateToLang(word, callback) {
+            let from = document.getElementById('from').value;
+            let to = document.getElementById('to').value;
+            console.log(from, to);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${from}&tl=${to}&dt=t&q=` + encodeURIComponent(word), true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    var translatedWord = response[0][0][0];
+                    callback(translatedWord);
+                }
+            };
+            xhr.send();
+        }
+
+        function translateLang() {
+            let translateMyWord = document.getElementById('translate_drop').innerHTML;
+            // Example usage:
+            var translatedWord = translateToLang(translateMyWord, function (translatedWord) {
+                console.log("English: hello, Hindi: " + translatedWord);
+                document.getElementById('translate_drop').innerHTML = ("English: hello friends, Hindi: " + translatedWord)
+                return translatedWord;
+            });
+        }
+
+    </script>
+    <!-- Translate on click ends -->
+
+
+
+
+
+
+</body>
+
+</html>
